@@ -15,8 +15,21 @@ class PasienController extends Controller
 {
     public function index()
     {
-        $data = Pasien::all();
+        $data = Pasien::orderBy('id', 'DESC')->get();
         return view('admin.pasien.index',compact('data'));
+    }
+    
+    public function add()
+    {
+        $kelurahan = Kelurahan::get();
+        return view('admin.pasien.add',compact('kelurahan'));
+    }
+
+    public function edit($id)
+    {
+        $data = Pasien::find($id);
+        $kelurahan = Kelurahan::get();
+        return view('admin.pasien.edit',compact('data','kelurahan'));
     }
 
     public function upload(request $req)
@@ -59,24 +72,60 @@ class PasienController extends Controller
             return $value;
         });
     
-        try{
-            // DB::transaction(function ($mapping) {
+        DB::beginTransaction();
+        try { 
                 foreach($mapping as $item){
                     if($item['no_pasien'] == 'no'){
-    
+
                     }else{
-                        Pasien::create($item);
+                        $check = Pasien::where('no_pasien', $item['no_pasien'])->first();
+                        if($check == null){
+                            Pasien::create($item);
+                        }else{
+                        }
                     }
                 }
-            // });
-            toastr()->success('Data Pasien Berhasil Di Upload');
-            return back();
-        }
-        catch(\Exception $e)
-        {
-            toastr()->error('Upload Data Gagal, Terjadi Kesalahan Format');
-            return back();
-        }
 
+                DB::commit(); 
+                toastr()->success('Data Pasien Berhasil Di Upload');  
+                return back();
+            } catch (\Exception $e) {
+                dd($e);
+                DB::rollback();
+                toastr()->error('Upload Data Gagal, Terjadi Kesalahan Format');
+                return back();
+            }
+
+    }
+
+    public function store(Request $req)
+    {
+        $attr = $req->all();
+        $check = Pasien::where('no_pasien', $req->no_pasien)->first();
+        if($check == null){
+            Pasien::create($attr);
+            toastr()->success('Data Pasien Berhasil Di Simpan');
+            return redirect('/pasien');
+        }else{
+            toastr()->error('No Pasien Sudah Ada');
+            return back();
+        }
+    }
+
+    public function update(Request $req, $id)
+    {
+        $attr = $req->all();
+        $attr['tgl_masuk'] = Carbon::parse($req->tgl_masuk)->format('Y-m-d');
+        $attr['tgl_keluar'] = Carbon::parse($req->tgl_keluar)->format('Y-m-d');
+        Pasien::find($id)->update($attr);
+        toastr()->success('Data Pasien Berhasil Di Update');
+        return redirect('/pasien');
+    }
+
+    public function delete($id)
+    {
+        Pasien::find($id)->delete();
+        toastr()->success('Data Pasien Berhasil Di Hapus');
+        return back();
     }
 }

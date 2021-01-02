@@ -10,39 +10,88 @@ crossorigin=""/>
 @endpush
 
 @section('content')
-<a href="/kelurahan" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp; Kembali</a> <br /><br />
+<a href="/pasien" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp; Kembali</a> <br /><br />
 
 <div class="row">
   <div class="col-lg-12">
     <div class="card card-primary card-outline">
       <div class="card-header">
-        <h5 class="card-title m-0"> <i class="fas fa-server"></i> Tambah Data Kelurahan </h5>
+        <h5 class="card-title m-0"> <i class="fas fa-server"></i> Tambah Data Pasien </h5>
       </div>
-      <form method="post" action="/kelurahan/add">
+      <form method="post" action="/pasien/add">
         @csrf
       <div class="card-body">
         <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Kelurahan</label>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">No Pasien</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="nama" placeholder="Nama Kelurahan" required>
+              <input type="text" class="form-control" name="no_pasien" placeholder="No pasien" required>
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Lat</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis Kelamin</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="lat" id="lat" required>
+              <select name="jkel" class="form-control">
+                <option value="L">Pria</option>
+                <option value="P">Wanita</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Long</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Umur</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="long" id="long" required>
+              <input type="text" class="form-control" name="umur" required maxlength="3" onkeypress="return hanyaAngka(event)">
             </div>
           </div>
           <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Map</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Pekerjaan</label>
             <div class="col-sm-10">
-                <div id="mapid"></div>
+              <input type="text" class="form-control" name="pekerjaan" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Hasil</label>
+            <div class="col-sm-10">
+              <select name="hasil" class="form-control">
+                <option value="">-PILIH-</option>
+                <option value="KONFIRMASI">KONFIRMASI</option>
+                <option value="SUSPECT">SUSPECT</option>
+                <option value="PROBABLE">PROBABLE</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Gejala</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="gejala">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Tgl masuk</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" name="tgl_masuk" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Tgl keluar</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" name="tgl_keluar" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">LOS</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="los">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">KELURAHAN</label>
+            <div class="col-sm-10">
+              <select name="kelurahan_id" class="form-control">
+                <option value="">-PILIH-</option>
+                @foreach ($kelurahan as $item)
+                <option value="{{$item->id}}">{{$item->nama}}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -59,19 +108,12 @@ crossorigin=""/>
 @endsection
 
 @push('js')
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-crossorigin=""></script>
 <script>
-    var map = L.map('mapid').setView([-6.203106313909043, 106.836372623998], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-    
-    map.on('click', function(e) {
-        document.getElementById("lat").value = e.latlng.lat;
-        document.getElementById("long").value = e.latlng.lng;
-    });
+  function hanyaAngka(event) {
+      var angka = (event.which) ? event.which : event.keyCode
+      if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+          return false;
+      return true;
+  }
 </script>
-
 @endpush

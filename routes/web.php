@@ -28,4 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/pasien', 'PasienController@index');
     Route::post('/pasien/upload', 'PasienController@upload');
+    Route::get('/pasien/add', 'PasienController@add');
+    Route::post('/pasien/add', 'PasienController@store');
+    Route::get('/pasien/delete/{id}', 'PasienController@delete');
+    Route::get('/pasien/edit/{id}', 'PasienController@edit');
+    Route::post('/pasien/edit/{id}', 'PasienController@update');
 });

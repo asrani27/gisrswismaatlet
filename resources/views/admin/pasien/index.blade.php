@@ -8,7 +8,7 @@
 @endpush
 
 @section('content')
-<a href="#" class="btn btn-sm btn-danger"><i class="fas fa-plus"></i>&nbsp; Add Pasien</a>
+<a href="/pasien/add" class="btn btn-sm btn-danger"><i class="fas fa-plus"></i>&nbsp; Add Pasien</a>
 <button type="button" class="btn btn-info btn-sm " data-toggle="modal" data-target="#modal-default">
   <i class="fas fa-upload"></i>
   Upload Data
