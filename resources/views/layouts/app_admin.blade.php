@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>RS Wisma Atlet</title>
+  <title>RS. Wisma Atlet</title>
   <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <a href="/" class="navbar-brand">
         <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light text-white"><strong>RS Wisma Atlet</strong></span>
+        <span class="brand-text font-weight-light text-white"><strong>RS. Wisma Atlet</strong></span>
       </a>
       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
