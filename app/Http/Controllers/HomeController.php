@@ -91,4 +91,10 @@ class HomeController extends Controller
     {
         return view('admin.polygon');
     }
+
+    public function data($id)
+    {
+        $data = Kelurahan::find($id)->pasien;
+        return view('data',compact('data'));
+    }
 }

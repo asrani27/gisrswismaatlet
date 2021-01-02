@@ -5,6 +5,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/login', 'LoginController@index')->name('login');
 Route::post('/login', 'LoginController@login');
+Route::get('/data/pasien/v/{id}', 'HomeController@data');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -33,4 +34,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pasien/delete/{id}', 'PasienController@delete');
     Route::get('/pasien/edit/{id}', 'PasienController@edit');
     Route::post('/pasien/edit/{id}', 'PasienController@update');
+    
+    Route::get('/data/pasien/{id}', 'PasienController@data');
 });

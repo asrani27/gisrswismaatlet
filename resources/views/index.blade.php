@@ -223,7 +223,7 @@ crossorigin=""></script>
         <strong>KONFIRMASI : '+kelurahan[i].konfirmasi+' Orang</strong><br/>\
         <strong>SUSPECT : '+kelurahan[i].suspect+' Orang</strong><br/>\
         <strong>PROBABLE : '+kelurahan[i].probable+' Orang</strong><br/>\
-        <a href="#" class="btn btn-xs btn-default">Selengkapnya...</a>';
+        <a href="/data/pasien/v/'+kelurahan[i].id+'" class="btn btn-xs btn-default">Selengkapnya...</a>';
           
             L.marker([kelurahan[i].lat, kelurahan[i].long],{icon:greenIcon}).addTo(map).bindPopup(PopUp);
         };

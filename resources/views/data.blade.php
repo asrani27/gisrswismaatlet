@@ -1,4 +1,4 @@
-@extends('layouts.app_admin')
+@extends('layouts.app')
 
 @push('css') 
 <!-- DataTables -->
@@ -8,12 +8,7 @@
 @endpush
 
 @section('content')
-<a href="/pasien/add" class="btn btn-sm btn-danger"><i class="fas fa-plus"></i>&nbsp; Add Pasien</a>
-<button type="button" class="btn btn-info btn-sm " data-toggle="modal" data-target="#modal-default">
-  <i class="fas fa-upload"></i>
-  Upload Data
-</button>
-<a href="/storage/format_excel.xlsx" class="btn btn-sm bg-gradient-success"><i class="fas fa-file-excel"></i>&nbsp; Downloaf Format</a>
+<a href="/" class="btn btn-sm btn-secondary"><i class="fas fa-plus"></i>&nbsp; Kembali</a>
  <br /><br />
 <div class="row">
   <div class="col-lg-12">
@@ -29,8 +24,8 @@
                 <th class="text-center">No Pasien</th>
                 <th class="text-center">Umur</th>
                 <th class="text-center">Jkel</th>
+                <th class="text-center">Hasil</th>
                 <th class="text-center">Kelurahan</th>
-                <th class="text-center">#</th>
             </tr>
             </thead>
             <tbody>
@@ -43,11 +38,8 @@
                         <td class="text-center">{{$item->no_pasien}}</td>
                         <td class="text-center">{{$item->umur}} Tahun</td>
                         <td class="text-center">{{$item->jkel}}</td>
+                        <td class="text-center">{{$item->hasil}}</td>
                         <td class="text-center">{{$item->kelurahan == null ? '' :$item->kelurahan->nama}}</td>
-                        <td>
-                            <a href="/pasien/edit/{{$item->id}}" class="btn btn-xs btn-warning"><i class="fas fa-edit"></i></a>
-                            <a href="/pasien/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data Ini?');"><i class="fas fa-trash"></i></a>
-                        </td>
                     </tr>
                 @endforeach
             
@@ -58,41 +50,7 @@
   </div>
   <!-- /.col-md-6 -->
 </div>
-<div class="modal fade" id="modal-default" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Upload Data</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <form method="post" action="/pasien/upload" enctype="multipart/form-data">
-        @csrf
-        <div class="modal-body">
-          {{-- <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-4 col-form-label">Tanggal Upload</label>
-            <div class="col-sm-8">
-              <input type="date" class="form-control" name="tanggal_upload" required>
-            </div>
-          </div> --}}
-          <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-3 col-form-label">File Excel</label>
-            <div class="col-sm-9">
-              <input type="file" class="form-control" name="file" required>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
+
 @endsection
 
 @push('js')

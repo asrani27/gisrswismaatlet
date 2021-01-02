@@ -128,4 +128,10 @@ class PasienController extends Controller
         toastr()->success('Data Pasien Berhasil Di Hapus');
         return back();
     }
+
+    public function data($id)
+    {
+        $data = Kelurahan::find($id)->pasien;
+        return view('admin.pasien.data',compact('data'));
+    }
 }
