@@ -10,7 +10,7 @@ crossorigin=""/>
 @endpush
 
 @section('content')
-<h5 class="mb-2"><i class="fas fa-virus"></i> Data Covid-19 Tanggal {{\Carbon\Carbon::today()->format('d M Y')}}</h5>
+<h5 class="mb-2"><i class="fas fa-virus"></i> Data Covid-19 Tanggal {{\Carbon\Carbon::today()->subDay(1)->format('d M Y')}}</h5>
   <div class="row">
     <div class="col-md-4 col-sm-6 col-12">
       <div class="info-box">
