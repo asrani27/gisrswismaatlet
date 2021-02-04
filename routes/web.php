@@ -16,6 +16,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/polygon', 'HomeController@polygon');
     Route::get('/logout', 'LoginController@logout');
 
+    Route::get('/report', 'ReportController@index');
+    Route::get('/report/kelurahan', 'ReportController@akumulasi');
+    Route::post('/report/kelurahan/search', 'ReportController@search');
+
     Route::get('/kelurahan', 'KelurahanController@index');
     Route::get('/kelurahan/add', 'KelurahanController@add');
     Route::post('/kelurahan/add', 'KelurahanController@store');

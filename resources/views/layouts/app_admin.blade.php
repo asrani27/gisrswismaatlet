@@ -52,6 +52,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="/pasien" class="nav-link text-white"><i class="fas fa-users text-white"></i> Pasien</a>
           </li>
+          <li class="nav-item">
+            <a href="/report" class="nav-link text-white"><i class="fas fa-file text-white"></i> Report</a>
+          </li>
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle  text-white"><i class="fas fa-cogs text-white"></i> Setting</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
