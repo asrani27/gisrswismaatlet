@@ -144,7 +144,7 @@ crossorigin=""></script>
         kelurahan = {!!json_encode($kelurahan)!!}
    
         var greenIcon = L.icon({
-            iconUrl: '/storage/25-12-2020-03-40-17iconfinder_archlinux_386451.png',
+            iconUrl: '/storage/yellow_icon_32.png',
         });
         
         for (var i = 0; i < kelurahan.length; i++) { 

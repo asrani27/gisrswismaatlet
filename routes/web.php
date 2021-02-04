@@ -3,6 +3,9 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/testmap', function () {
+    return view('testmap');
+});
 Route::get('/login', 'LoginController@index')->name('login');
 Route::post('/login', 'LoginController@login');
 Route::get('/data/pasien/v/{id}', 'HomeController@data');

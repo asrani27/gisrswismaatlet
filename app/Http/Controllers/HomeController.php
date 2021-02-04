@@ -44,8 +44,10 @@ class HomeController extends Controller
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
             $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
+            $item->icon = 'icon';
             return $item;
         })->toArray();
+        //dd($kelurahan);
         return view('index',compact('kelurahan','data'));
     }
 

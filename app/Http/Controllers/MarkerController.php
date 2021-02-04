@@ -28,7 +28,7 @@ class MarkerController extends Controller
     public function store(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'file' => 'mimes:png,svg'
+            //'file' => 'mimes:png,svg'
         ]);
 
         if ($validator->fails()) {
@@ -52,9 +52,26 @@ class MarkerController extends Controller
     
     public function update(Request $req, $id)
     {
-        Marker::find($id)->update($req->all());
+        $validator = Validator::make($req->all(), [
+            //'file' => 'mimes:png,svg,jpg,jpeg'
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('File Harus Berupa .PNG / .SVG');
+            return back();
+        }
+        
+        if ($req->hasFile('file')) {
+            $filename = $req->file->getClientOriginalName();
+            $filename = date('d-m-Y-h-i-s') . $filename;
+            $req->file->storeAs('/public', $filename);
+        }
+        
+        $attr = $req->all();
+        $attr['icon'] = $filename;
+        Marker::find($id)->update($attr);
         toastr()->success('Data Marker Berhasil Di Update');
-        return redirect('/kelurahan');
+        return redirect('/marker');
     }
 
     public function delete($id)
