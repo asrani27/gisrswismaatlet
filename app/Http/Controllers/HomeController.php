@@ -44,10 +44,24 @@ class HomeController extends Controller
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
             $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
-            $item->icon = 'icon';
+            if($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
+                $item->icon = '/storage/icon_red_32.png';
+            }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
+                $item->icon = '/storage/yellow_icon_32.png';
+            }elseif($item->probable > $item->konfirmasi && $item->probable > $item->suspect){
+                $item->icon = '/storage/black_icon_32.png';
+            }elseif($item->konfirmasi == $item->suspect){
+                $item->icon = '/storage/icon_red_32.png';
+            }elseif($item->konfirmasi == $item->probable){
+                $item->icon = '/storage/black_icon_32.png';
+            }elseif($item->suspect == $item->probable){
+                $item->icon = '/storage/black_icon_32.png';
+            }else{
+                $item->icon = '/storage/icon_green_32.png';
+            }
             return $item;
         })->toArray();
-        //dd($kelurahan);
+        
         return view('index',compact('kelurahan','data'));
     }
 
@@ -84,6 +98,21 @@ class HomeController extends Controller
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
             $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
+            if($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
+                $item->icon = '/storage/icon_red_32.png';
+            }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
+                $item->icon = '/storage/yellow_icon_32.png';
+            }elseif($item->probable > $item->konfirmasi && $item->probable > $item->suspect){
+                $item->icon = '/storage/black_icon_32.png';
+            }elseif($item->konfirmasi == $item->suspect){
+                $item->icon = '/storage/icon_red_32.png';
+            }elseif($item->konfirmasi == $item->probable){
+                $item->icon = '/storage/black_icon_32.png';
+            }elseif($item->suspect == $item->probable){
+                $item->icon = '/storage/black_icon_32.png';
+            }else{
+                $item->icon = '/storage/icon_green_32.png';
+            }
             return $item;
         })->toArray();
         return view('admin.home',compact('kelurahan','data'));

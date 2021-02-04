@@ -142,12 +142,11 @@ crossorigin=""></script>
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
         kelurahan = {!!json_encode($kelurahan)!!}
-   
-        var greenIcon = L.icon({
-            iconUrl: '/storage/yellow_icon_32.png',
-        });
-        
+        console.log(kelurahan);
         for (var i = 0; i < kelurahan.length; i++) { 
+          var greenIcon = L.icon({
+            iconUrl: kelurahan[i].icon,
+          });
           let dataPasien = kelurahan[i].pasien;
           var nop1 = kelurahan[i].pasien[0] == null ? '' : kelurahan[i].pasien[0].no_pasien;
           var nop2 = kelurahan[i].pasien[1] == null ? '' : kelurahan[i].pasien[1].no_pasien;

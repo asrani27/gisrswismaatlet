@@ -29,6 +29,7 @@
                 <th class="text-center">No Pasien</th>
                 <th class="text-center">Umur</th>
                 <th class="text-center">Jkel</th>
+                <th class="text-center">Status</th>
                 <th class="text-center">Kelurahan</th>
                 <th class="text-center">#</th>
             </tr>
@@ -43,6 +44,7 @@
                         <td class="text-center">{{$item->no_pasien}}</td>
                         <td class="text-center">{{$item->umur}} Tahun</td>
                         <td class="text-center">{{$item->jkel}}</td>
+                        <td class="text-center">{{$item->hasil}}</td>
                         <td class="text-center">{{$item->kelurahan == null ? '' :$item->kelurahan->nama}}</td>
                         <td>
                             <a href="/pasien/edit/{{$item->id}}" class="btn btn-xs btn-warning"><i class="fas fa-edit"></i></a>
