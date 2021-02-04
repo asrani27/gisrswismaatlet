@@ -13,9 +13,9 @@ class HomeController extends Controller
     public function index()
     {
         
-        $date = Carbon::now();
-        $s = $date->startOfWeek()->format('Y-m-d');
-        $e = $date->endOfWeek()->format('Y-m-d');
+        $e = Carbon::today()->subDay(1)->format('Y-m-d');
+        $s = Carbon::today()->subDay(8)->format('Y-m-d');
+        
         $period = CarbonPeriod::create($s, $e);
         $tanggal = [];
         foreach ($period as $dated) {
@@ -67,9 +67,9 @@ class HomeController extends Controller
 
     public function home()
     {
-        $date = Carbon::now();
-        $s = $date->startOfWeek()->format('Y-m-d');
-        $e = $date->endOfWeek()->format('Y-m-d');
+        $e = Carbon::today()->subDay(1)->format('Y-m-d');
+        $s = Carbon::today()->subDay(8)->format('Y-m-d');
+        
         $period = CarbonPeriod::create($s, $e);
         $tanggal = [];
         foreach ($period as $dated) {
