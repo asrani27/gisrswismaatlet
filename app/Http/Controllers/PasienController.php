@@ -82,6 +82,7 @@ class PasienController extends Controller
                         if($check == null){
                             Pasien::create($item);
                         }else{
+                        
                         }
                     }
                 }
@@ -90,7 +91,6 @@ class PasienController extends Controller
                 toastr()->success('Data Pasien Berhasil Di Upload');  
                 return back();
             } catch (\Exception $e) {
-                dd($e);
                 DB::rollback();
                 toastr()->error('Upload Data Gagal, Terjadi Kesalahan Format');
                 return back();

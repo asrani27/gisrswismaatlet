@@ -44,7 +44,9 @@ class HomeController extends Controller
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
             $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
-            if($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
+            if($item->konfirmasi == 0 && $item->suspect == 0 && $item->probable == 0){
+                $item->icon = '/storage/icon_green_32.png';
+            }elseif($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
                 $item->icon = '/storage/icon_red_32.png';
             }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
                 $item->icon = '/storage/yellow_icon_32.png';
@@ -98,7 +100,9 @@ class HomeController extends Controller
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
             $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
-            if($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
+            if($item->konfirmasi == 0 && $item->suspect == 0 && $item->probable == 0){
+                $item->icon = '/storage/icon_green_32.png';
+            }elseif($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
                 $item->icon = '/storage/icon_red_32.png';
             }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
                 $item->icon = '/storage/yellow_icon_32.png';
