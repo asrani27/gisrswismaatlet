@@ -7,6 +7,7 @@ use App\Kelurahan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Imports\PasienImport;
+use App\Imports\PasienCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
@@ -44,33 +45,58 @@ class PasienController extends Controller
         }
         
         $data = Excel::toArray(new PasienImport, request()->file('file'))[0];
-
-        //Mapping Data
+        
         $mapping = collect($data)->map(function($item, $key){
-            $value['no_pasien'] = $item[0];
-            $value['jkel']      = $item[1];
-            $value['umur']      = $item[2];
-            $value['pekerjaan'] = $item[3];
-            $value['hasil']     = $item[4];
-            $value['gejala']     = $item[5];
+            $value=[];
+            if($item[6] == 'Tgl.Masuk'){
+                $value['no_pasien'] = 'no';
 
-            try{
-                $value['tgl_masuk']         = Carbon::CreateFromFormat('d-M-Y H:i', $item[6])->format('Y-m-d H:i:00');
-                $value['tgl_keluar']        = Carbon::CreateFromFormat('d-M-Y H:i', $item[7])->format('Y-m-d H:i:00');
-            }catch(\Exception $e){
-                $value['tgl_masuk']         = null;
-                $value['tgl_keluar']        = null;
+            }else{
+                $value['no_pasien'] = $item[0];
+                $value['jkel']      = $item[1];
+                $value['umur']      = $item[2];
+                $value['pekerjaan'] = $item[3];
+                $value['hasil']     = $item[4];
+                $value['gejala']     = $item[5];
+                
+                $excel_date = $item[6];
+                $unix_date = ($excel_date - 25569) * 86400;
+                $excel_date = 25569 + ($unix_date / 86400);                
+                $unix_date = ($excel_date - 25569) * 86400;
+                gmdate('Y-m-d', $unix_date);
+    
+                $value['tgl_masuk']    = gmdate('Y-m-d', $unix_date);
+                if($item[7] == null){
+                    $value['tgl_keluar']    = null;
+                }else{
+                    $excel_date = $item[7];
+                    $unix_date = ($excel_date - 25569) * 86400;
+                    $excel_date = 25569 + ($unix_date / 86400);                
+                    $unix_date = ($excel_date - 25569) * 86400;
+                    gmdate('Y-m-d', $unix_date);
+                    
+                    $value['tgl_keluar']    = gmdate('Y-m-d', $unix_date);
+                }
+                // try{
+                //     $value['tgl_masuk']         = Carbon::CreateFromFormat('d-M-Y H:i', $item[6])->format('Y-m-d H:i:00');
+                //     $value['tgl_keluar']        = Carbon::CreateFromFormat('d-M-Y H:i', $item[7])->format('Y-m-d H:i:00');
+                // }catch(\Exception $e){
+                //     $value['tgl_masuk']         = null;
+                //     $value['tgl_keluar']        = null;
+                // }
+    
+                $value['los']               = $item[8];
+                $value['status_pulang']     = $item[9];
+                $value['provinsi']          = $item[10];
+                $value['kabupaten_kota']    = $item[11];
+                $value['kecamatan']         = $item[12];
+                $value['kelurahan_id']      = Kelurahan::where('nama', $item[13])->first() == null ? null : Kelurahan::where('nama', $item[13])->first()->id;
+                
             }
-
-            $value['los']               = $item[8];
-            $value['status_pulang']     = $item[9];
-            $value['provinsi']          = $item[10];
-            $value['kabupaten_kota']    = $item[11];
-            $value['kecamatan']         = $item[12];
-            $value['kelurahan_id']      = Kelurahan::where('nama', $item[13])->first() == null ? null : Kelurahan::where('nama', $item[13])->first()->id;
             
             return $value;
         });
+        //dd($mapping);
     
         DB::beginTransaction();
         try { 
