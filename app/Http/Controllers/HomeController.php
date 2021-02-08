@@ -42,25 +42,70 @@ class HomeController extends Controller
         
         $kelurahan = Kelurahan::all()->map(function($item, $key){
             $item->pasien = $item->pasien;
+            $item->total = count($item->pasien);
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
             $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
-            if($item->konfirmasi == 0 && $item->suspect == 0 && $item->probable == 0){
-                $item->icon = '/storage/icon_green_32.png';
+            if($item->konfirmasi == 0 && $item->suspect == 0 && $item->probable == 0){                
+                $m = Marker::where('warna','Hijau')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }elseif($item->konfirmasi > $item->suspect && $item->konfirmasi > $item->probable){
-                $item->icon = '/storage/icon_red_32.png';
+                           
+                $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
+                
             }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
-                $item->icon = '/storage/yellow_icon_32.png';
+                $m = Marker::where('warna','Kuning')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
+                
             }elseif($item->probable > $item->konfirmasi && $item->probable > $item->suspect){
-                $item->icon = '/storage/black_icon_32.png';
+                $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }elseif($item->konfirmasi == $item->suspect){
-                $item->icon = '/storage/icon_red_32.png';
+                $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
+                
             }elseif($item->konfirmasi == $item->probable){
-                $item->icon = '/storage/black_icon_32.png';
+                $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }elseif($item->suspect == $item->probable){
-                $item->icon = '/storage/black_icon_32.png';
+                $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }else{
-                $item->icon = '/storage/icon_green_32.png';
+                $m = Marker::where('warna','Hijau')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }
             return $item;
         })->toArray();
@@ -134,11 +179,27 @@ class HomeController extends Controller
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }elseif($item->konfirmasi == $item->suspect){
-                $item->icon = '/storage/icon_red_32.png';
+                $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
+                
             }elseif($item->konfirmasi == $item->probable){
-                $item->icon = '/storage/black_icon_32.png';
+                $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }elseif($item->suspect == $item->probable){
-                $item->icon = '/storage/black_icon_32.png';
+                $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
+                if($m == null){
+                    $item->icon = '';
+                }else{
+                    $item->icon = '/storage/'.$m->icon;   
+                }
             }else{
                 $m = Marker::where('warna','Hijau')->first();
                 if($m == null){
