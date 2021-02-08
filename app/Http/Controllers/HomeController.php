@@ -45,11 +45,12 @@ class HomeController extends Controller
             $item->total = count($item->pasien);
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
-            $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
+            $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));         
+            $h = Marker::where('warna','Hijau')->first();
             if($item->konfirmasi == 0 && $item->suspect == 0 && $item->probable == 0){                
                 $m = Marker::where('warna','Hijau')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.$h->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -57,7 +58,7 @@ class HomeController extends Controller
                            
                 $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Merah')->orderBy('jumlah','ASC')->first()->icon;    
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -65,7 +66,7 @@ class HomeController extends Controller
             }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
                 $m = Marker::where('warna','Kuning')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Kuning')->orderBy('jumlah','ASC')->first()->icon;    
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -73,14 +74,14 @@ class HomeController extends Controller
             }elseif($item->probable > $item->konfirmasi && $item->probable > $item->suspect){
                 $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Hitam')->orderBy('jumlah','ASC')->first()->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }elseif($item->konfirmasi == $item->suspect){
                 $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Merah')->orderBy('jumlah','ASC')->first()->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -88,21 +89,21 @@ class HomeController extends Controller
             }elseif($item->konfirmasi == $item->probable){
                 $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Hitam')->orderBy('jumlah','ASC')->first()->icon;      
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }elseif($item->suspect == $item->probable){
                 $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Hitam')->orderBy('jumlah','ASC')->first()->icon;      
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }else{
                 $m = Marker::where('warna','Hijau')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.$h->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -146,11 +147,12 @@ class HomeController extends Controller
             $item->total = count($item->pasien);
             $item->konfirmasi = count($item->pasien->where('hasil', 'KONFIRMASI'));
             $item->suspect = count($item->pasien->where('hasil', 'SUSPECT'));
-            $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));
+            $item->probable = count($item->pasien->where('hasil', 'PROBABLE'));          
+            $h = Marker::where('warna','Hijau')->first();
             if($item->konfirmasi == 0 && $item->suspect == 0 && $item->probable == 0){                
                 $m = Marker::where('warna','Hijau')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.$h->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -158,7 +160,7 @@ class HomeController extends Controller
                            
                 $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Merah')->orderBy('jumlah','ASC')->first()->icon;    
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -166,7 +168,7 @@ class HomeController extends Controller
             }elseif($item->suspect > $item->konfirmasi && $item->suspect > $item->probable){
                 $m = Marker::where('warna','Kuning')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Kuning')->orderBy('jumlah','ASC')->first()->icon;    
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -174,14 +176,14 @@ class HomeController extends Controller
             }elseif($item->probable > $item->konfirmasi && $item->probable > $item->suspect){
                 $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Hitam')->orderBy('jumlah','ASC')->first()->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }elseif($item->konfirmasi == $item->suspect){
                 $m = Marker::where('warna','Merah')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Merah')->orderBy('jumlah','ASC')->first()->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
@@ -189,21 +191,21 @@ class HomeController extends Controller
             }elseif($item->konfirmasi == $item->probable){
                 $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Hitam')->orderBy('jumlah','ASC')->first()->icon;      
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }elseif($item->suspect == $item->probable){
                 $m = Marker::where('warna','Hitam')->where('jumlah', '>=', $item->total)->orderBy('jumlah','ASC')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.Marker::where('warna','Hitam')->orderBy('jumlah','ASC')->first()->icon;      
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
             }else{
                 $m = Marker::where('warna','Hijau')->first();
                 if($m == null){
-                    $item->icon = '';
+                    $item->icon = '/storage/'.$h->icon;   
                 }else{
                     $item->icon = '/storage/'.$m->icon;   
                 }
