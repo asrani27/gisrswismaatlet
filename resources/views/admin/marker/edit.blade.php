@@ -16,11 +16,25 @@
       <form method="post" action="/marker/edit/{{$data->id}}" enctype="multipart/form-data">
         @csrf
       <div class="card-body">
+        
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Warna</label>
+          <div class="col-sm-10">
+            <div class="custom-file">
+              <select class="form-control" name="warna" required>
+                  <option value="Hijau" {{$data->warna == 'Hijau' ? 'selected' :''}}>Hijau</option>
+                  <option value="Kuning" {{$data->warna == 'Kuning' ? 'selected' :''}}>Kuning</option>
+                  <option value="Merah" {{$data->warna == 'Merah' ? 'selected' :''}}>Merah</option>
+                  <option value="Hitam" {{$data->warna == 'Hitam' ? 'selected' :''}}>Hitam</option>
+              </select>
+            </div>
+          </div>
+        </div>
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Icon</label>
             <div class="col-sm-10">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" name="file" id="exampleInputFile" required>
+                <input type="file" class="custom-file-input" name="file" id="exampleInputFile">
                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
               </div>
             </div>

@@ -17,6 +17,20 @@
         @csrf
       <div class="card-body">
         <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Warna</label>
+            <div class="col-sm-10">
+              <div class="custom-file">
+                <select class="form-control" name="warna" required>
+                    <option value="" selected>-Pilih-</option>
+                    <option value="Hijau">Hijau</option>
+                    <option value="Kuning">Kuning</option>
+                    <option value="Merah">Merah</option>
+                    <option value="Hitam">Hitam</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Icon</label>
             <div class="col-sm-10">
               <div class="custom-file">

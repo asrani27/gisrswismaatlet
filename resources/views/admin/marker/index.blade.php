@@ -20,8 +20,9 @@
             <thead>
             <tr class="bg-gradient-info">
                 <th class="text-center">No</th>
+                <th class="text-center">Warna</th>
                 <th class="text-center">Icon</th>
-                <th class="text-center">Jumlah</th>
+                <th class="text-center">Total Pasien</th>
                 <th class="text-center">#</th>
             </tr>
             </thead>
@@ -32,8 +33,9 @@
                 @foreach ($data as $item)
                     <tr>
                         <td class="text-center">{{$no++}}</td>
+                        <td class="text-center">{{$item->warna}}</td>
                         <td class="text-center"><img src="/storage/{{$item->icon}}"></td>
-                        <td class="text-center">{{$item->jumlah}}</td>
+                        <td class="text-center"> > {{$item->jumlah}}</td>
                         <td class="text-center">
                             <a href="/marker/edit/{{$item->id}}" class="btn btn-xs btn-warning"><i class="fas fa-edit"></i></a>
                             <a href="/marker/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data Ini?');"><i class="fas fa-trash"></i></a>
