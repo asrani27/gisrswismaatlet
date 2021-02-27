@@ -21,6 +21,12 @@ crossorigin=""/>
       <form method="post" action="/kelurahan/add">
         @csrf
       <div class="card-body">
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Kodepos</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="kodepos" placeholder="Kodepos" onkeyup="this.value = this.value.toUpperCase();" required>
+          </div>
+        </div>
           <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Kelurahan</label>
             <div class="col-sm-10">

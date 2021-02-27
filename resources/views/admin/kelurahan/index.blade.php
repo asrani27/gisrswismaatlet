@@ -20,6 +20,7 @@
             <thead>
             <tr class="bg-gradient-info">
                 <th class="text-center">No</th>
+                <th class="text-center">Kodepos</th>
                 <th class="text-center">Nama Kelurahan</th>
                 <th class="text-center">Lat</th>
                 <th class="text-center">Long</th>
@@ -33,6 +34,7 @@
                 @foreach ($data as $item)
                     <tr>
                         <td>{{$no++}}</td>
+                        <td>{{$item->kodepos}}</td>
                         <td>{{$item->nama}}</td>
                         <td>{{$item->lat}}</td>
                         <td>{{$item->long}}</td>
